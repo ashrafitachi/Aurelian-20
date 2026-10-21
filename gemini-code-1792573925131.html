@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aurelian-20 | Department of English, DU</title>
+
+  <!-- Google Fonts: Playfair Display for serif literary headlines & Inter for UI body text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- External Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-brand">
+        <span class="brand-title">AURELIAN-20</span>
+        <span class="brand-sub">DEPT. OF ENGLISH • UNIVERSITY OF DHAKA</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#notices" class="nav-link">Notices</a>
+        <a href="#materials" class="nav-link">Materials</a>
+        <a href="#events" class="nav-link">Events</a>
+        <a href="#polls" class="nav-link">Polls</a>
+      </div>
+
+      <div class="nav-actions">
+        <button id="adminToggleBtn" class="btn btn-outline">
+          <i data-lucide="lock" class="icon-sm"></i>
+          <span id="adminBtnText">Admin Login</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Admin Indicator Bar -->
+  <div id="adminBanner" class="admin-banner hidden">
+    <div class="container admin-banner-content">
+      <span><i data-lucide="shield-check"></i> Admin Mode Active — You can now add, edit, or delete portal content.</span>
+      <button id="logoutBtn" class="btn btn-sm btn-text">Logout</button>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="container hero-content">
+      <span class="hero-badge">Official Batch Portal</span>
+      <h1>Aurelian-20</h1>
+      <p class="hero-subtitle">Department of English, University of Dhaka</p>
+      <p class="hero-quote">"Words are, in my not-so-humble opinion, our most inexhaustible source of magic."</p>
+      <div class="hero-cta">
+        <a href="#notices" class="btn btn-primary">View Announcements</a>
+        <a href="#materials" class="btn btn-secondary">Access Class Notes</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="container main-content">
+
+    <!-- Section: Important Notices -->
+    <section id="notices" class="portal-section">
+      <div class="section-header">
+        <div>
+          <h2>Important Notices</h2>
+          <p class="section-desc">Class updates, exam schedules, and academic announcements.</p>
+        </div>
+        <button class="btn btn-primary admin-only hidden" onclick="openModal('noticeModal')">
+          <i data-lucide="plus"></i> Post Notice
+        </button>
+      </div>
+
+      <div class="filter-pills" id="noticeFilters">
+        <button class="pill active" data-filter="all">All</button>
+        <button class="pill" data-filter="Exams">Exams</button>
+        <button class="pill" data-filter="Assignments">Assignments</button>
+        <button class="pill" data-filter="Routine">Routine</button>
+      </div>
+
+      <div id="noticesList" class="grid-cards">
+        <!-- Notices populated via JavaScript -->
+      </div>
+    </section>
+
+    <!-- Section: Academic Materials -->
+    <section id="materials" class="portal-section">
+      <div class="section-header">
+        <div>
+          <h2>Academic Materials & Notes</h2>
+          <p class="section-desc">Lecture slides, PDF hand-outs, readings, and reference books.</p>
+        </div>
+        <button class="btn btn-primary admin-only hidden" onclick="openModal('materialModal')">
+          <i data-lucide="plus"></i> Add Material
+        </button>
+      </div>
+
+      <div class="filter-pills" id="materialFilters">
+        <button class="pill active" data-filter="all">All Courses</button>
+        <button class="pill" data-filter="Prose">Prose</button>
+        <button class="pill" data-filter="Poetry">Poetry</button>
+        <button class="pill" data-filter="Linguistics">Linguistics</button>
+        <button class="pill" data-filter="Criticism">Criticism</button>
+      </div>
+
+      <div id="materialsList" class="grid-cards">
+        <!-- Materials populated via JavaScript -->
+      </div>
+    </section>
+
+    <!-- Section: Upcoming Events -->
+    <section id="events" class="portal-section">
+      <div class="section-header">
+        <div>
+          <h2>Upcoming Events & Schedule</h2>
+          <p class="section-desc">Departmental programs, batch get-togethers, and deadlines.</p>
+        </div>
+        <button class="btn btn-primary admin-only hidden" onclick="openModal('eventModal')">
+          <i data-lucide="plus"></i> Add Event
+        </button>
+      </div>
+
+      <div id="eventsList" class="events-timeline">
+        <!-- Events populated via JavaScript -->
+      </div>
+    </section>
+
+    <!-- Section: Batch Polls -->
+    <section id="polls" class="portal-section">
+      <div class="section-header">
+        <div>
+          <h2>Batch Polls</h2>
+          <p class="section-desc">Vote on class decisions, outing dates, and batch opinions.</p>
+        </div>
+        <button class="btn btn-primary admin-only hidden" onclick="openModal('pollModal')">
+          <i data-lucide="plus"></i> Create Poll
+        </button>
+      </div>
+
+      <div id="pollsList" class="grid-cards">
+        <!-- Polls populated via JavaScript -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p>© Aurelian-20 • Department of English, University of Dhaka</p>
+      <p class="footer-sub">Maintained for class updates and academic resources.</p>
+    </div>
+  </footer>
+
+  <!-- Modals -->
+
+  <!-- Admin Login Modal -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content text-center">
+      <span class="close-btn" onclick="closeModal('loginModal')">&times;</span>
+      <h3>Admin Access</h3>
+      <p class="modal-sub">Enter password to manage site content.</p>
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <input type="password" id="adminPasswordInput" placeholder="Enter Admin Password" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Authenticate</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Post Notice Modal -->
+  <div id="noticeModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('noticeModal')">&times;</span>
+      <h3>Post New Notice</h3>
+      <form onsubmit="handleAddNotice(event)">
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" id="noticeTitle" required placeholder="e.g. Midterm Examination Schedule">
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <select id="noticeCategory">
+            <option value="Exams">Exams</option>
+            <option value="Assignments">Assignments</option>
+            <option value="Routine">Routine</option>
+            <option value="General">General</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Details / Description</label>
+          <textarea id="noticeContent" rows="4" required placeholder="Enter full announcement details..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Publish Notice</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Material Modal -->
+  <div id="materialModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('materialModal')">&times;</span>
+      <h3>Add Study Material</h3>
+      <form onsubmit="handleAddMaterial(event)">
+        <div class="form-group">
+          <label>Material Title</label>
+          <input type="text" id="materialTitle" required placeholder="e.g. Paradise Lost - Book 1 Summary">
+        </div>
+        <div class="form-group">
+          <label>Course / Subject</label>
+          <select id="materialCourse">
+            <option value="Poetry">Poetry</option>
+            <option value="Prose">Prose</option>
+            <option value="Linguistics">Linguistics</option>
+            <option value="Criticism">Criticism</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Resource / Google Drive Link</label>
+          <input type="url" id="materialLink" required placeholder="https://drive.google.com/file/d/...">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Add Material</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add Event Modal -->
+  <div id="eventModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('eventModal')">&times;</span>
+      <h3>Add Upcoming Event</h3>
+      <form onsubmit="handleAddEvent(event)">
+        <div class="form-group">
+          <label>Event Name</label>
+          <input type="text" id="eventTitle" required placeholder="e.g. Batch Reunion / Study Tour">
+        </div>
+        <div class="form-group">
+          <label>Date & Time</label>
+          <input type="text" id="eventDate" required placeholder="e.g. Nov 12, 2026 - 10:00 AM">
+        </div>
+        <div class="form-group">
+          <label>Location / Venue</label>
+          <input type="text" id="eventLocation" required placeholder="e.g. Arts Building, DU">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Save Event</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Create Poll Modal -->
+  <div id="pollModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal('pollModal')">&times;</span>
+      <h3>Create New Poll</h3>
+      <form onsubmit="handleCreatePoll(event)">
+        <div class="form-group">
+          <label>Poll Question</label>
+          <input type="text" id="pollQuestion" required placeholder="e.g. Which date is suitable for Make-up Class?">
+        </div>
+        <div class="form-group">
+          <label>Options (separated by commas)</label>
+          <input type="text" id="pollOptions" required placeholder="Friday, Saturday, Sunday">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Launch Poll</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- External JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
