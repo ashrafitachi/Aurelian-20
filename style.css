@@ -490,3 +490,8 @@ h1, h2, h3 {
   .event-row { flex-direction: column; align-items: flex-start; gap: 10px; }
   .event-details { margin: 0; }
 }
+
+/* Ensure clicks inside buttons always hit the button element */
+button i, button svg {
+  pointer-events: none;
+}
